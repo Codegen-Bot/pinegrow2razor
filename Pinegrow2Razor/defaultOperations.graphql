@@ -1,0 +1,44 @@
+query GetFiles($whitelist: [String!]! $blacklist: [String!]!) {
+    files(whitelist: $whitelist blacklist: $blacklist) {
+        path
+        kind
+    }
+}
+
+query GetFileContents($textFilePath: String!) {
+    readTextFile(textFilePath: $textFilePath)
+}
+
+mutation AddFile($filePath: String! $textAndCarets: String!) {
+    addFile(filePath: $filePath textAndCarets: $textAndCarets) {
+        id
+    }
+}
+
+mutation AddText($caretId: String! $textAndCarets: String!) {
+    addText(caretId: $caretId textAndCarets: $textAndCarets) {
+        id
+    }
+}
+
+mutation AddKeyedText($key: String! $caretId: String! $textAndCarets: String!) {
+    addKeyedText(key: $key caretId: $caretId textAndCarets: $textAndCarets) {
+        id
+    }
+}
+
+mutation AddTextByTags($tags: [CaretTagInput!]! $textAndCarets: String!) {
+    addTextByTags(tags: $tags textAndCarets: $textAndCarets) {
+        id
+    }
+}
+
+mutation AddKeyedTextByTags($key: String! $tags: [CaretTagInput!]! $textAndCarets: String!) {
+    addKeyedTextByTags(key: $key tags: $tags textAndCarets: $textAndCarets) {
+        id
+    }
+}
+
+mutation Log($severity: LogSeverity! $message: String! $arguments: [String!]) {
+    log(severity: $severity message: $message arguments: $arguments)
+}

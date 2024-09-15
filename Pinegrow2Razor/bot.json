@@ -1,0 +1,14 @@
+{
+  "type": "wasm",
+  "id": "bot://hub/dotnet/pinegrow2razor",
+  "readme": "Bot.md",
+  "configurationSchema": "configurationSchema.graphql",
+  "dependenciesSchema": "schema.graphql",
+  "wasm": "bin/Release/net8.0/wasi-wasm/AppBundle/Pinegrow2Razor.wasm",
+  "deduplicateConfigurationSchema": true,
+  "dependencies": {
+    "bot://core/output": "1.0.0",
+    "bot://core/filesystem": "1.0.0",
+    "bot://core/log": "1.0.0"
+  }
+}

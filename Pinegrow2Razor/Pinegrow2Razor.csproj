@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <!-- This is commented out because otherwise your IDE will be full of red squiggly lines. -->
+    <!-- The build process using the codegenbot docker container should still work -->
+    <!-- because it explicitly specifies the runtime when it builds the bot. -->
+    <!--<RuntimeIdentifier>wasi-wasm</RuntimeIdentifier>-->
+    <OutputType>Exe</OutputType>
+    <PublishTrimmed>true</PublishTrimmed>
+    <!-- WASM bots can be difficult to debug, so it's better ot just have nullable enabled -->
+    <!-- and treat warnings as errors from the beginning. It makes your life easier in the future. -->
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Extism.Pdk" Version="1.0.3" />
+    <PackageReference Include="CodegenBot" Version="1.1.0-alpha.89" />
+    <PackageReference Include="Macross.Json.Extensions" Version="3.0.0" />
+  </ItemGroup>
+</Project>

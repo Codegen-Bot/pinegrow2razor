@@ -1,0 +1,79 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Caret @source(name: "Caret", schema: "output") {
+  separator: String!
+  string: String!
+  tags: [CaretTag!]!
+  tagValue(tagName: String!): String
+  matches(tags: [CaretTagInput!]!): Boolean!
+  id: String!
+}
+
+type CaretTag @source(name: "CaretTag", schema: "output") {
+  name: String!
+  value: String!
+}
+
+type Configuration @source(name: "Configuration", schema: "Configuration") {
+  "It's best to add documentation strings for your fields, because they are displayed\nwhen codegen.bot prompts the bot user for each value."
+  outputPath: String!
+}
+
+type File @source(name: "File", schema: "filesystem") {
+  path: String!
+  kind: FileKind!
+}
+
+type Mutation {
+  noop: String
+  getOrAddCaret(caretId: String! tags: [CaretTagInput!]! indentation: String! separator: String!): Caret! @delegate(schema: "output", path: "getOrAddCaret")
+  addFile(filePath: String! textAndCarets: String! caretDelimiterLength: Int! = 9): Caret! @delegate(schema: "output", path: "addFile")
+  addKeyedText(caretId: String! key: String! textAndCarets: String! caretDelimiterLength: Int! = 9): Caret! @delegate(schema: "output", path: "addKeyedText")
+  addText(caretId: String! textAndCarets: String! caretDelimiterLength: Int! = 9): Caret! @delegate(schema: "output", path: "addText")
+  addKeyedTextByTags(tags: [CaretTagInput!]! key: String! textAndCarets: String! caretDelimiterLength: Int! = 9): [Caret!]! @delegate(schema: "output", path: "addKeyedTextByTags")
+  addTextByTags(tags: [CaretTagInput!] textAndCarets: String! caretDelimiterLength: Int! = 9): [Caret!]! @delegate(schema: "output", path: "addTextByTags")
+  log(severity: LogSeverity! message: String! arguments: [String!]): String! @delegate(schema: "log", path: "log")
+}
+
+type Query {
+  noop: String
+  caret(caretId: String!): Caret @delegate(schema: "output", path: "caret")
+  carets(tags: [CaretTagInput!]!): [Caret!]! @delegate(schema: "output", path: "carets")
+  readTextFile(textFilePath: String! fileVersion: FileVersion): String @delegate(schema: "filesystem", path: "readTextFile")
+  files(whitelist: [String!] blacklist: [String!]): [File!]! @delegate(schema: "filesystem", path: "files")
+  logNoop: Boolean! @delegate(schema: "log", path: "logNoop")
+  configuration: Configuration! @delegate(schema: "Configuration", path: "configuration")
+}
+
+input CaretTagInput @source(name: "CaretTagInput", schema: "output") {
+  name: String!
+  value: String!
+}
+
+enum FileKind @source(name: "FileKind", schema: "filesystem") {
+  BINARY
+  TEXT
+}
+
+enum FileVersion @source(name: "FileVersion", schema: "filesystem") {
+  GENERATED
+  HEAD
+}
+
+enum LogSeverity @source(name: "LogSeverity", schema: "log") {
+  TRACE
+  DEBUG
+  INFORMATION
+  WARNING
+  ERROR
+  CRITICAL
+}
+
+"Delegates a resolver to a remote schema."
+directive @delegate("The path to the field on the remote schema." path: String "The name of the schema to which this field shall be delegated to." schema: String!) on FIELD_DEFINITION
+
+"Annotates the original name of a type."
+directive @source("The original name of the annotated type." name: String! "The name of the schema to which this type belongs to." schema: String!) repeatable on OBJECT | FIELD_DEFINITION | ARGUMENT_DEFINITION | INTERFACE | UNION | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION
