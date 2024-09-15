@@ -213,7 +213,9 @@ public static partial class GraphQLOperations
             Query = """
                 query GetConfiguration {
                   configuration {
-                    outputPath
+                    pageDirectory
+                    componentDirectory
+                    treatPartialsAsComponents
                   }
                 }
                 """,
@@ -481,8 +483,14 @@ public class GetConfigurationVariables { }
 
 public class GetConfiguration
 {
-    [JsonPropertyName("outputPath")]
-    public required string OutputPath { get; set; }
+    [JsonPropertyName("pageDirectory")]
+    public required string PageDirectory { get; set; }
+
+    [JsonPropertyName("componentDirectory")]
+    public required string ComponentDirectory { get; set; }
+
+    [JsonPropertyName("treatPartialsAsComponents")]
+    public bool? TreatPartialsAsComponents { get; set; }
 }
 
 public class GetFileContentsData
