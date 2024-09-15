@@ -1,0 +1,88 @@
+{
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "cpp": {
+      "type": "object",
+      "properties": {
+        "includeDirectories": {
+          "$ref": "#/$defs/listOfString"
+        }
+      }
+    },
+    "targetPath": {
+      "type": "string"
+    },
+    "installs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "botId": {
+            "type": "string"
+          },
+          "botVersion": {
+            "type": "string"
+          },
+          "installationName": {
+            "type": "string"
+          },
+          "configuration": true,
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "runName": {
+                  "type": "string"
+                },
+                "botId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "crlf": {
+      "enum": [
+        "crlf",
+        "cr",
+        "lf",
+        "os"
+      ]
+    },
+    "stealth": {
+      "type": "boolean"
+    },
+    "generatedBranch": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "hideCodegenBotFromTheseRemotes": {
+      "$ref": "#/$defs/listOfString"
+    },
+    "commitMessages": {
+      "type": "string"
+    },
+    "exec": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "$defs": {
+    "listOfString": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
