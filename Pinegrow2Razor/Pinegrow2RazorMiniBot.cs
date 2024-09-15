@@ -137,8 +137,16 @@ public class Pinegrow2RazorMiniBot() : IMiniBot
                     {
                         url = url.Substring(0, url.Length - ".html".Length);
                     }
-                    
+                    if (url.EndsWith(".htm"))
+                    {
+                        url = url.Substring(0, url.Length - ".htm".Length);
+                    }
                     url = "/" + string.Join("/", url.Trim('/').Split('/').Select(part => part.Kebaberize()));
+
+                    if (url.EndsWith("/index"))
+                    {
+                        url = url.Substring(0, url.Length - "index".Length);
+                    }
                     
                     GraphQLOperations.AddFile(
                         newPath,
