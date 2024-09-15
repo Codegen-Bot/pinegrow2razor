@@ -13,6 +13,72 @@
     {
       "botId": "bot://core/log",
       "botVersion": "1.0.0"
+    },
+    {
+      "botId": "bot://core/schema",
+      "botVersion": "1.0.0"
+    },
+    {
+      "botId": "bot://hub/dotnet/botfactory",
+      "botVersion": "0.0.1-alpha46",
+      "configuration": {
+        "id": "bot://hub/dotnet/pinegrow2razor",
+        "outputPath": "Pinegrow2Razor",
+        "projectName": "Pinegrow2Razor",
+        "minimalWorkingExample": false,
+        "dotnetVersion": "8",
+        "copybots": null
+      },
+      "dependencies": [
+        {
+          "botId": "bot://core/output"
+        },
+        {
+          "botId": "bot://core/filesystem"
+        },
+        {
+          "botId": "bot://core/log"
+        },
+        {
+          "botId": "bot://core/schema"
+        }
+      ]
+    },
+    {
+      "botId": "bot://hub/dotnet/solution",
+      "botVersion": "0.0.1-alpha3",
+      "configuration": {
+        "outputPath": "Pinegrow2Razor.sln"
+      },
+      "dependencies": [
+        {
+          "botId": "bot://core/output"
+        },
+        {
+          "botId": "bot://core/filesystem"
+        },
+        {
+          "botId": "bot://core/log"
+        }
+      ]
+    },
+    {
+      "botId": "bot://hub/.gitignore",
+      "botVersion": "0.0.1-alpha1",
+      "configuration": {
+        "outputPath": null
+      },
+      "dependencies": [
+        {
+          "botId": "bot://core/output"
+        },
+        {
+          "botId": "bot://core/filesystem"
+        },
+        {
+          "botId": "bot://core/log"
+        }
+      ]
     }
   ]
 }

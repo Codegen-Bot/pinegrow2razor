@@ -26,9 +26,7 @@ public class Exports
             // Create all our minibots here
             IMiniBot[] miniBots =
             [
-                // TODO - remove the ExampleMiniBot entry from this list because it creates a hello world file
-                // that won't be useful in real life.
-                new ExampleMiniBot(),
+                new Pinegrow2RazorMiniBot(),
             ];
 
             // Run each minibot in order

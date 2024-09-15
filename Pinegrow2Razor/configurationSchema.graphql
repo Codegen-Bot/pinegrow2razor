@@ -6,9 +6,7 @@
 # This is a special type. A non-nullable field of this type called "configuration" will be
 # inserted in the query root type, so that this bot can access its configuration values.
 type Configuration {
-    """
-    It's best to add documentation strings for your fields, because they are displayed
-    when codegen.bot prompts the bot user for each value.
-    """
-    outputPath: String!
+    pageDirectory: String!
+    componentDirectory: String!
+    treatPartialsAsComponents: Boolean
 }

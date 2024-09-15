@@ -15,6 +15,7 @@ public class ExampleMiniBot() : IMiniBot
         // or our configuration.
         var configuration = GraphQLOperations.GetConfiguration();
 
+        /*
         GraphQLOperations.AddFile(
             $"{configuration.Configuration.OutputPath}",
             $$"""
@@ -22,5 +23,6 @@ public class ExampleMiniBot() : IMiniBot
             
             """
         );
+        */
     }
 }
