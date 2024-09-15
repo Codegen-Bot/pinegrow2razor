@@ -98,9 +98,13 @@ public class Pinegrow2RazorMiniBot() : IMiniBot
                         ? line.Substring(minIndentation)
                         : line));
                 }
-                    
+
+                newContent = newContent
+                    .Replace("&amp;apos;", "'")
+                    .Replace("&copy;", "\u00a9");
+                
                 var newPath = Path.Combine(isPartial ? configuration.Configuration.ComponentDirectory : configuration.Configuration.PageDirectory, Path.GetRelativePath(pinegrowProjectDirectory, file.Path));
-                newPath = Path.Combine(Path.GetDirectoryName(newPath)!, Path.GetFileNameWithoutExtension(newPath) + ".razor");
+                newPath = Path.Combine(Path.GetDirectoryName(newPath)!, Path.GetFileNameWithoutExtension(newPath).Pascalize() + ".razor");
 
                 Imports.Log(new LogEvent()
                 {
